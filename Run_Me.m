@@ -62,7 +62,9 @@ K_F1 = [k_1 k_1*B_1' ; (k_1*B_1')' B_1*k_1*B_1'];
 K_F2 = [k_2 k_2*B_2' ; (k_2*B_2')' B_2*k_2*B_2'];
 K_F3 = [k_3 k_3*B_3' ; (k_3*B_3')' B_3*k_3*B_3'];
 K = K_F1 + K_F2 + K_F3;
-
+[q_TRA,R_TRA]=TRA_finder(I,[0 1 0]);
+[D,V]=nat_freq(M,K,R_TRA)
+terminate
 %% Damping Matrix
 % Mount Damping Coefficients
 c_l_1 = diag([94.6 111.3 92.4]);
