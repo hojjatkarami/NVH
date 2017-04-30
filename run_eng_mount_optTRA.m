@@ -16,12 +16,22 @@ x0(end)=50;
 load f1 f2 f3
 f=f3;
 % options = optimoptions(@fmincon,'Algorithm','active-set','MaxIterations',1500);
-% [f1,fval1]=fmincon(@myfun,x0,[],[],[],[],lb,ub)
+% [fmincon_sqpactive,fval1]=fmincon(@myfun,x0,[],[],[],[],lb,ub,[],options)
+% tic
 % options = optimoptions('ga','InitialPopulationMatrix',x0);
-% % [f2,fval2]=ga(@myfun,28,[],[],[],[],lb,ub)
-% options = optimoptions('particleswarm','InitialSwarmMatrix',x0,'HybridFcn',@fmincon);
-% [f3,fval3]=particleswarm(@myfun,28,lb,ub)
-save f1 f2 f3
+% [ga_no_option,fval2]=ga(@myfun,28,[],[],[],[],lb,ub,[])
+% toc
+% tic
+% options = optimoptions('particleswarm','SwarmSize',500);
+% [pso4_size500,fval3]=particleswarm(@myfun,28,lb,ub,options)
+% toc
+tic
+% options = optimoptions('patternsearch','InitialPopulationMatrix',x0);
+[simulanneal,fval2]=simulannealbnd(@myfun,x0,lb,ub)
+toc
+
+save simulanneal
+terminate
 %% Variables
 global m I T_Amp T_Freq T_phase
 T_Amp = 100;    % N/m
